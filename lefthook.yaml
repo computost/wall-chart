@@ -5,6 +5,7 @@ pre-commit:
       stage_fixed: true
       exclude:
         - "pnpm-lock.yaml"
+        - ".gitignore"
 
     - name: typecheck
       run: pnpm typecheck
