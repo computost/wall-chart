@@ -4,7 +4,7 @@ pre-commit:
       run: pnpm lint --fix {staged_files}
       stage_fixed: true
       exclude:
-        - "*.yaml"
+        - "pnpm-lock.yaml"
 
     - name: typecheck
       run: pnpm typecheck
