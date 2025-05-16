@@ -1,7 +1,8 @@
 {
-    "recommendations": [
-        "esbenp.prettier-vscode",
-        "bradlc.vscode-tailwindcss",
-        "dbaeumer.vscode-eslint"
-    ]
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "redhat.vscode-yaml"
+  ]
 }
