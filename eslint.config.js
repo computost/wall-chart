@@ -1,48 +1,79 @@
+// @ts-check
+
 import js from "@eslint/js";
 import json from "@eslint/json";
 import markdown from "@eslint/markdown";
-import tailwindcss from "@hyoban/eslint-plugin-tailwindcss"
+import tailwindcss from "@hyoban/eslint-plugin-tailwindcss";
 import perfectionist from "eslint-plugin-perfectionist";
 import pluginReact from "eslint-plugin-react";
-import { defineConfig } from "eslint/config";
 import fs from "fs";
 import globals from "globals";
 import path from "path";
 import tseslint from "typescript-eslint";
 
-export default defineConfig([
+export default tseslint.config([
   { ignores: [".react-router", "build"] },
-  { extends: ["js/recommended"], files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"], plugins: { js } },
-  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"], languageOptions: { globals: {...globals.browser, ...globals.node} } },
+  {
+    extends: [js.configs.recommended],
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    plugins: { js },
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+  },
   tseslint.configs.recommended,
   {
-    extends: [pluginReact.configs.flat.recommended, pluginReact.configs.flat["jsx-runtime"]],
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]
+    extends: [
+      pluginReact.configs.flat.recommended,
+      pluginReact.configs.flat["jsx-runtime"],
+    ],
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
   },
-  { extends: ["json/recommended"], files: ["**/*.json"], language: "json/json", plugins: { json } },
-  { extends: ["json/recommended"], files: ["**/*.jsonc"], language: "json/jsonc", plugins: { json } },
-  { extends: ["json/recommended"], files: ["**/*.json5"], language: "json/json5", plugins: { json } },
-  { extends: ["markdown/recommended"], files: ["**/*.md"], language: "markdown/gfm", plugins: { markdown } },
+  {
+    extends: [json.configs.recommended],
+    files: ["**/*.json"],
+    language: "json/json",
+    plugins: { json },
+  },
+  {
+    extends: [json.configs.recommended],
+    files: ["**/*.jsonc"],
+    language: "json/jsonc",
+    plugins: { json },
+  },
+  {
+    extends: [json.configs.recommended],
+    files: ["**/*.json5"],
+    language: "json/json5",
+    plugins: { json },
+  },
+  {
+    extends: [markdown.configs.recommended],
+    files: ["**/*.md"],
+    language: "markdown/gfm",
+    plugins: { markdown },
+  },
   tailwindcss.configs["flat/recommended"],
   {
     extends: [perfectionist.configs["recommended-natural"]],
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
   },
   {
     settings: {
       react: {
-        "version": "detect"
+        version: "detect",
       },
       tailwindcss: {
-        config: findTailwindImportCss(process.cwd())
-      }
-    }
-  }
+        config: findTailwindImportCss(process.cwd()),
+      },
+    },
+  },
 ]);
 
 /**
  * Recursively walks `dir`, looking for the first .css file
- * that has a line starting with @import "tailwindcss
+ * that has a line starting with \@import "tailwindcss
  * @param {string} dir  absolute path to start searching from
  * @returns {string|null}  absolute path to matching CSS, or null if none found
  *
