@@ -70,7 +70,7 @@ If you're familiar with deploying Node applications, the built-in app server is 
 
 Make sure to deploy the output of `pnpm build`
 
-```
+```txt
 ├── package.json
 ├── pnpm-lock.yaml
 ├── build/
