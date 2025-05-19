@@ -15,6 +15,14 @@ export default defineConfig({
           setupFiles: ["vitest/register-jest-dom.ts"],
         },
       },
+      {
+        extends: true,
+        test: {
+          environment: "node",
+          include: ["app/**/*.server.test.ts"],
+          name: "server",
+        },
+      },
     ],
     setupFiles: ["vitest/cleanup-after-each.ts"],
   },

@@ -6,6 +6,7 @@ pre-commit:
       exclude:
         - "pnpm-lock.yaml"
         - ".gitignore"
+        - "Dockerfile"
 
     - name: typecheck
       run: pnpm typecheck

@@ -4,9 +4,18 @@ import { expect, it } from "vitest";
 
 import Home, { meta } from "./home";
 
-const Stub = createRoutesStub([{ Component: Home, meta, path: "/" }]);
+const Stub = createRoutesStub([
+  {
+    Component: Home,
+    loader() {
+      return { message: "This is a test" };
+    },
+    meta,
+    path: "/",
+  },
+]);
 
 it("renders main", async () => {
   render(<Stub />);
-  expect(await screen.findByRole("main")).toBeInTheDocument();
+  expect(await screen.findByText("This is a test")).toBeInTheDocument();
 });
