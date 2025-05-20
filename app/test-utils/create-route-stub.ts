@@ -4,8 +4,10 @@ import type {
   CreateComponentProps,
   CreateErrorBoundaryProps,
   CreateHydrateFallbackProps,
+  CreateMetaArgs,
   CreateServerActionArgs,
   CreateServerLoaderArgs,
+  MetaDescriptors,
 } from "react-router/route-module";
 
 type ActionData<TRouteInfo> = TRouteInfo extends {
@@ -27,7 +29,12 @@ type StubRouteObject = Parameters<typeof createRoutesStub>[0][number];
 
 type TypedStubRouteObject<TRouteInfo extends RouteInfo> = Omit<
   StubRouteObject,
-  "action" | "Component" | "ErrorBoundary" | "HydrateFallback" | "loader"
+  | "action"
+  | "Component"
+  | "ErrorBoundary"
+  | "HydrateFallback"
+  | "loader"
+  | "meta"
 > & {
   action?: (
     args: CreateServerActionArgs<TRouteInfo>,
@@ -43,6 +50,7 @@ type TypedStubRouteObject<TRouteInfo extends RouteInfo> = Omit<
     ): LoaderData<TRouteInfo> | Promise<LoaderData<TRouteInfo>>;
     hydrate?: boolean;
   };
+  meta?: (args: CreateMetaArgs<TRouteInfo>) => MetaDescriptors;
 };
 
 export function createRouteStub<TRouteInfo extends RouteInfo>(
