@@ -2,17 +2,20 @@ import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { expect, it } from "vitest";
 
-import Home, { meta } from "./home";
+import { createRouteStub } from "~/test-utils/create-route-stub";
+
+import type { Info } from "./+types/home";
+
+import Home from "./home";
 
 const Stub = createRoutesStub([
-  {
+  createRouteStub<Info>({
     Component: Home,
     loader() {
       return { message: "This is a test" };
     },
-    meta,
     path: "/",
-  },
+  }),
 ]);
 
 it("renders main", async () => {
