@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "react-router build",
-    "dev": "cross-env NODE_ENV=development node server.js",
+    "dev": "docker compose up -d mongodb && cross-env NODE_ENV=development node server.js",
     "start": "node server.js",
     "typecheck": "react-router typegen && tsc",
     "lint": "eslint --max-warnings 0 .",

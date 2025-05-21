@@ -8,7 +8,7 @@ import { afterAll, beforeAll } from "vitest";
 let startedContainer: StartedMongoDBContainer | undefined;
 
 beforeAll(async () => {
-  const container = new MongoDBContainer("mongo:6.0.1");
+  const container = new MongoDBContainer("mongo:8.0.9");
   startedContainer = await container.start();
   await mongoose.connect(startedContainer.getConnectionString(), {
     directConnection: true,
