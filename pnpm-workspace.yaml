@@ -1,5 +1,8 @@
 onlyBuiltDependencies:
   - "@tailwindcss/oxide"
+  - cpu-features
   - esbuild
   - lefthook
+  - protobufjs
+  - ssh2
 sideEffectsCache: false
