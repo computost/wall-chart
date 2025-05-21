@@ -21,6 +21,7 @@ export default defineConfig({
           environment: "node",
           include: ["app/**/*.server.test.ts"],
           name: "server",
+          setupFiles: ["vitest/mongodb-setup.ts"],
         },
       },
     ],
