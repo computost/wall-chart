@@ -35,6 +35,9 @@ export default function Home() {
                 setQuery(event.target.value);
                 fetcher.submit(event.currentTarget.form);
               }}
+              onFocus={(event) =>
+                !fetcher.data && fetcher.submit(event.currentTarget.form)
+              }
               value={query}
             />
           </fetcher.Form>
