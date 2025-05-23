@@ -3,15 +3,17 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 export default function Home() {
   return (
-    <div className="mx-auto mt-4 h-[812px] w-[375px] rounded-lg bg-stone-950 p-3 shadow shadow-gray-50">
-      <Combobox>
-        <div className="flex gap-2 rounded-md bg-green-950 p-1">
-          <ComboboxButton>
-            <MagnifyingGlassIcon className="h-4 w-4" />
-          </ComboboxButton>
-          <ComboboxInput className="grow focus:outline-0" />
-        </div>
-      </Combobox>
+    <div className="h-full min-h-dvh bg-white p-4 dark:bg-black">
+      <div className="mx-auto h-[812px] w-[375px] rounded-lg bg-stone-50 p-3 shadow-lg shadow-gray-950 dark:bg-stone-950 dark:shadow-gray-50">
+        <Combobox>
+          <div className="flex gap-2 rounded-md bg-stone-100 p-1 shadow shadow-gray-950 dark:bg-stone-900 dark:shadow-gray-50">
+            <ComboboxButton>
+              <MagnifyingGlassIcon className="h-4 w-4" />
+            </ComboboxButton>
+            <ComboboxInput className="grow focus:outline-0" />
+          </div>
+        </Combobox>
+      </div>
     </div>
   );
 }
