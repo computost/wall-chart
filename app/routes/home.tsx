@@ -1,5 +1,5 @@
 import { Combobox, ComboboxButton, ComboboxInput } from "@headlessui/react";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
         <Combobox>
           <div className="flex gap-2 rounded-md bg-stone-100 p-1 shadow shadow-gray-950 dark:bg-stone-900 dark:shadow-gray-50">
             <ComboboxButton>
-              <MagnifyingGlassIcon className="h-4 w-4" />
+              <MagnifyingGlassIcon className="size-4" />
             </ComboboxButton>
             <ComboboxInput className="grow focus:outline-0" />
           </div>
