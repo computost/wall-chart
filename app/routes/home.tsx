@@ -1,9 +1,30 @@
-import { Combobox, ComboboxButton, ComboboxInput } from "@headlessui/react";
-import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
+import { faker } from "@faker-js/faker";
+import {
+  Combobox,
+  ComboboxButton,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
+} from "@headlessui/react";
 
 import "./home.css";
 
+import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
+import { useState } from "react";
+
 export default function Home() {
+  const [query, setQuery] = useState("");
+  const queryParts = query.trim().split(/\s+/);
+  const filteredWorkers =
+    query.trim().length === 0
+      ? workers
+      : workers.filter((worker) =>
+          queryParts.every((part) =>
+            worker.name.toLocaleLowerCase().includes(part.toLocaleLowerCase()),
+          ),
+        );
+  const topFilteredWorkers = filteredWorkers.slice(0, 10);
+
   return (
     <div className="topography h-full min-h-dvh bg-white p-4 dark:bg-black">
       <div className="mx-auto h-[812px] w-[375px] rounded-lg bg-stone-50 p-3 shadow-lg shadow-gray-950 dark:bg-stone-950 dark:shadow-gray-50">
@@ -12,8 +33,28 @@ export default function Home() {
             <ComboboxButton>
               <MagnifyingGlassIcon className="size-4" />
             </ComboboxButton>
-            <ComboboxInput className="grow focus:outline-0" />
+            <ComboboxInput
+              className="grow focus:outline-0"
+              onChange={(event) => setQuery(event.target.value)}
+              value={query}
+            />
           </div>
+
+          <ComboboxOptions
+            anchor="bottom"
+            className="ml-[-0.75rem] w-[calc(var(--button-width)+var(--input-width)+1rem)] rounded-b-md bg-stone-100 pt-1 transition duration-100 ease-in data-leave:data-closed:opacity-0 dark:bg-stone-900"
+            transition
+          >
+            {topFilteredWorkers.map((worker) => (
+              <ComboboxOption
+                className="py-2 pl-[calc(var(--button-width)+0.75rem)] data-focus:bg-stone-200 dark:data-focus:bg-stone-800"
+                key={worker.id}
+                value={worker.id}
+              >
+                {worker.name}
+              </ComboboxOption>
+            ))}
+          </ComboboxOptions>
         </Combobox>
       </div>
     </div>
@@ -26,3 +67,10 @@ export function meta() {
     { content: "Welcome to React Router!", name: "description" },
   ];
 }
+
+const workers = Array.from({ length: 100 })
+  .map((_, i) => ({
+    id: i,
+    name: faker.person.fullName(),
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
