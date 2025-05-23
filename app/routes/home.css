@@ -1,0 +1,9 @@
+@layer theme {
+  .topography {
+    background-image: url(./topography.svg);
+
+    @media (prefers-color-scheme: dark) {
+      background-image: url(./topography.dark.svg);
+    }
+  }
+}

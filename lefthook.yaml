@@ -4,8 +4,10 @@ pre-commit:
       run: pnpm lint --fix {staged_files}
       stage_fixed: true
       exclude:
-        - "pnpm-lock.yaml"
         - ".gitignore"
+        - "**/*.css"
+        - "**/*.svg"
+        - "pnpm-lock.yaml"
 
     - name: typecheck
       run: pnpm typecheck
