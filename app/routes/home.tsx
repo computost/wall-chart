@@ -7,7 +7,7 @@ import {
 } from "@headlessui/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
-import { useFetcher } from "react-router";
+import { useFetcher, useNavigate } from "react-router";
 
 import "./home.css";
 import type { loader } from "./find-workers";
@@ -15,6 +15,7 @@ import type { loader } from "./find-workers";
 export default function Home() {
   const fetcher = useFetcher<typeof loader>();
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
 
   return (
     <div className="topography h-full min-h-dvh bg-white p-4 dark:bg-black">
@@ -23,6 +24,8 @@ export default function Home() {
           onChange={(value) => {
             if (value === null) {
               setQuery("");
+            } else {
+              navigate(`/workers/${value}`);
             }
           }}
         >

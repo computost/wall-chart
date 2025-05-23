@@ -17,6 +17,16 @@ export function findWorkers(query: string): Worker[] {
   return topFilteredWorkers;
 }
 
+export function getWorker(id: number): Worker {
+  const result = workers.find((worker) => worker.id === id);
+
+  if (!result) {
+    throw new Error(`Could not find worker with id ${id}`);
+  }
+
+  return result;
+}
+
 const workers: Worker[] = Array.from({ length: 100 })
   .map((_, i) => ({
     id: i,
