@@ -19,7 +19,13 @@ export default function Home() {
   return (
     <div className="topography h-full min-h-dvh bg-white p-4 dark:bg-black">
       <div className="mx-auto h-[812px] w-[375px] rounded-lg bg-stone-50 p-3 shadow-lg shadow-gray-950 dark:bg-stone-950 dark:shadow-gray-50">
-        <Combobox>
+        <Combobox
+          onChange={(value) => {
+            if (value === null) {
+              setQuery("");
+            }
+          }}
+        >
           <fetcher.Form
             action="/find-workers"
             className="flex gap-2 rounded-md bg-stone-100 p-1 dark:bg-stone-900"
