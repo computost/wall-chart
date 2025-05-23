@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 import {
   Combobox,
   ComboboxButton,
@@ -6,24 +5,16 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/react";
-
-import "./home.css";
-
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 
+import { findWorkers } from "~/api/workers";
+
+import "./home.css";
+
 export default function Home() {
   const [query, setQuery] = useState("");
-  const queryParts = query.trim().split(/\s+/);
-  const filteredWorkers =
-    query.trim().length === 0
-      ? workers
-      : workers.filter((worker) =>
-          queryParts.every((part) =>
-            worker.name.toLocaleLowerCase().includes(part.toLocaleLowerCase()),
-          ),
-        );
-  const topFilteredWorkers = filteredWorkers.slice(0, 10);
+  const workers = findWorkers(query);
 
   return (
     <div className="topography h-full min-h-dvh bg-white p-4 dark:bg-black">
@@ -45,7 +36,7 @@ export default function Home() {
             className="ml-[-0.75rem] w-[calc(var(--button-width)+var(--input-width)+1rem)] rounded-b-md bg-stone-100 pt-1 transition duration-100 ease-in data-leave:data-closed:opacity-0 dark:bg-stone-900"
             transition
           >
-            {topFilteredWorkers.map((worker) => (
+            {workers.map((worker) => (
               <ComboboxOption
                 className="py-2 pl-[calc(var(--button-width)+0.75rem)] data-focus:bg-stone-200 dark:data-focus:bg-stone-800"
                 key={worker.id}
@@ -67,10 +58,3 @@ export function meta() {
     { content: "Welcome to React Router!", name: "description" },
   ];
 }
-
-const workers = Array.from({ length: 100 })
-  .map((_, i) => ({
-    id: i,
-    name: faker.person.fullName(),
-  }))
-  .sort((a, b) => a.name.localeCompare(b.name));
