@@ -28,10 +28,23 @@ export function getWorker(id: number): Worker {
 }
 
 const workers: Worker[] = Array.from({ length: 100 })
-  .map((_, i) => ({
-    id: i,
-    name: faker.person.fullName(),
-  }))
+  .map(
+    (_, i) =>
+      ({
+        assessment:
+          Math.random() > 0.7
+            ? (Math.ceil(Math.random() * 5) as Assessment)
+            : undefined,
+        id: i,
+        name: faker.person.fullName(),
+      }) satisfies Worker,
+  )
   .sort((a, b) => a.name.localeCompare(b.name));
 
-type Worker = { id: number; name: string };
+type Assessment = 1 | 2 | 3 | 4 | 5;
+
+type Worker = {
+  assessment?: Assessment;
+  id: number;
+  name: string;
+};
