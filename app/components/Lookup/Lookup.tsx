@@ -9,28 +9,33 @@ import {
   ArrowRightIcon,
   MagnifyingGlassIcon as LargeMagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { Link, useFetcher } from "react-router";
 
 import type { Worker } from "~/api/workers.server";
 import type { loader } from "~/routes/find-workers";
 
 type SearchProps = {
-  defaultValue?: Value;
   name: string;
+  onChange: (value: null | Value) => void;
+  value: null | Value;
 };
 
 type Value = Pick<Worker, "id" | "name">;
 
-export function Lookup({ defaultValue, name }: SearchProps): ReactNode {
-  const [value, setValue] = useState<null | Value>(defaultValue ?? null);
+export function Lookup({
+  name,
+  onChange: handleChange,
+  value,
+}: SearchProps): ReactNode {
   const fetcher = useFetcher<typeof loader>();
-  const [query, setQuery] = useState(defaultValue?.name ?? "");
+  const [query, setQuery] = useState(value?.name ?? "");
+  useEffect(() => setQuery(value?.name ?? ""), [value]);
 
   return (
     <Combobox
       onChange={(value) => {
-        setValue(value);
+        handleChange(value);
 
         if (value === null) {
           setQuery("");
@@ -70,7 +75,7 @@ export function Lookup({ defaultValue, name }: SearchProps): ReactNode {
           value={query}
         />
         {value && (
-          <Link reloadDocument to={`/workers/${value.id}`}>
+          <Link to={`/workers/${value.id}`}>
             <ArrowRightIcon className="size-6" />
           </Link>
         )}

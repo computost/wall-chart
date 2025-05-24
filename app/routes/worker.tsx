@@ -1,6 +1,5 @@
-import type { ReactNode } from "react";
-
 import { Field, Input, Label } from "@headlessui/react";
+import { type ReactNode, useEffect, useState } from "react";
 import { Form } from "react-router";
 
 import { getWorker } from "~/api/workers.server";
@@ -19,13 +18,16 @@ export function loader({ params }: Route.LoaderArgs) {
 
   const worker = getWorker(parseInt(params.workerId));
   const manager =
-    worker.managerId === undefined ? undefined : getWorker(worker.managerId);
+    worker.managerId === undefined ? null : getWorker(worker.managerId);
   return { id: worker.id, manager, name: worker.name };
 }
 
 export default function Worker({
   loaderData: worker,
 }: Route.ComponentProps): ReactNode {
+  const [manager, setManager] = useState(worker?.manager ?? null);
+  useEffect(() => setManager(worker?.manager ?? null), [worker]);
+
   if (!worker) {
     return null;
   }
@@ -44,7 +46,7 @@ export default function Worker({
         </Field>
         <Field className="w-full">
           <Label className="font-medium">Manager</Label>
-          <Lookup defaultValue={worker.manager} name="managerId" />
+          <Lookup name="managerId" onChange={setManager} value={manager} />
         </Field>
       </Form>
     </Screen>
