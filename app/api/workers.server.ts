@@ -36,6 +36,7 @@ const workers: Worker[] = Array.from({ length: 100 })
             ? (Math.ceil(Math.random() * 5) as Assessment)
             : undefined,
         id: i,
+        managerId: i === 0 ? undefined : Math.floor(Math.random() * i),
         name: faker.person.fullName(),
       }) satisfies Worker,
   )
@@ -46,5 +47,6 @@ type Assessment = 1 | 2 | 3 | 4 | 5;
 type Worker = {
   assessment?: Assessment;
   id: number;
+  managerId?: number;
   name: string;
 };
