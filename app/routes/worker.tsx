@@ -91,24 +91,14 @@ export default function Worker({
                   : (parseInt(event.target.value) as Assessment),
               )
             }
-            value={assessment}
+            value={assessment?.toString() ?? ""}
           >
-            <option selected={assessment === undefined} value={undefined} />
-            <option selected={assessment === 1} value={1}>
-              1 - Acting for
-            </option>
-            <option selected={assessment === 2} value={2}>
-              2 - Vocally for
-            </option>
-            <option selected={assessment === 3} value={3}>
-              3 - Undecided
-            </option>
-            <option selected={assessment === 4} value={4}>
-              4 - Vocally against
-            </option>
-            <option selected={assessment === 5} value={5}>
-              5 - Acting against
-            </option>
+            <option value="" />
+            <option value="1">1 - Acting for</option>
+            <option value="2">2 - Vocally for</option>
+            <option value="3">3 - Undecided</option>
+            <option value="4">4 - Vocally against</option>
+            <option value="5">5 - Acting against</option>
           </Select>
         </Field>
       </Form>
