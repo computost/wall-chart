@@ -43,7 +43,18 @@ export default function Worker({
   }
 
   return (
-    <Screen>
+    <Screen
+      className={
+        assessment &&
+        {
+          [1]: "bg-green-50! dark:bg-green-950!",
+          [2]: "bg-lime-50! dark:bg-lime-950!",
+          [3]: "bg-yellow-50! dark:bg-yellow-950!",
+          [4]: "bg-orange-50! dark:bg-orange-950!",
+          [5]: "bg-red-50! dark:bg-red-950!",
+        }[assessment]
+      }
+    >
       <Search />
       <Form className="flex h-full flex-col justify-center gap-6">
         <Field className="w-full">
