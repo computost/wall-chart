@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import { getWorker } from "~/api/workers.server";
+import { Screen } from "~/components/screen";
 
 import type { Route } from "./+types/worker";
 
@@ -11,5 +12,9 @@ export function loader({ params }: Route.LoaderArgs) {
 export default function Worker({
   loaderData: worker,
 }: Route.ComponentProps): ReactNode {
-  return <p>{worker.name}</p>;
+  return (
+    <Screen>
+      <p>{worker.name}</p>
+    </Screen>
+  );
 }
