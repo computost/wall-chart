@@ -7,6 +7,7 @@ pre-commit:
         - ".gitignore"
         - "**/*.css"
         - "**/*.svg"
+        - "Dockerfile"
         - "pnpm-lock.yaml"
 
     - name: typecheck
