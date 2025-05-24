@@ -30,10 +30,12 @@ export function loader({ params }: Route.LoaderArgs) {
 export default function Worker({
   loaderData: worker,
 }: Route.ComponentProps): ReactNode {
+  const [name, setName] = useState(worker?.name ?? "");
   const [manager, setManager] = useState(worker?.manager ?? null);
   const [assessment, setAssessment] = useState(worker?.assessment);
 
   useEffect(() => {
+    setName(worker?.name ?? "");
     setManager(worker?.manager ?? null);
     setAssessment(worker?.assessment);
   }, [worker]);
@@ -61,8 +63,9 @@ export default function Worker({
           <Label className="font-medium">Name</Label>
           <Input
             className="mt-2 block w-full rounded-lg bg-stone-100 px-3 py-1.5 focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-stone-500 dark:bg-stone-900"
-            defaultValue={worker.name}
             name="name"
+            onChange={(event) => setName(event.target.value)}
+            value={name}
           />
         </Field>
         <Field className="w-full">
