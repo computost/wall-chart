@@ -9,8 +9,6 @@ import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { useFetcher, useNavigate } from "react-router";
 
-import "./home.css";
-
 import { Screen } from "~/components/screen";
 
 import type { loader } from "./find-workers";

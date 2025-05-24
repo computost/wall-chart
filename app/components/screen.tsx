@@ -1,5 +1,7 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
+import "./screen.css";
+
 export function Screen({ children }: PropsWithChildren): ReactNode {
   return (
     <div className="topography h-full min-h-dvh bg-white p-4 dark:bg-black">
