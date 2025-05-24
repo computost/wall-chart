@@ -58,7 +58,7 @@ export default function Worker({
       }
     >
       <Search />
-      <Form className="flex h-full flex-col justify-center gap-6">
+      <Form className="flex grow flex-col justify-center gap-6">
         <Field className="w-full">
           <Label className="font-medium">Name</Label>
           <Input

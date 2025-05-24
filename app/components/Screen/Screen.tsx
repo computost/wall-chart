@@ -7,10 +7,10 @@ export function Screen({
   className,
 }: PropsWithChildren<{ className?: string }>): ReactNode {
   return (
-    <div className="topography h-full min-h-dvh bg-white p-4 dark:bg-black">
+    <div className="topography flex h-full min-h-dvh flex-col bg-white sm:p-4 dark:bg-black">
       <div
         className={[
-          "mx-auto h-[812px] w-[375px] rounded-lg bg-stone-50 p-3 shadow-lg shadow-gray-950 dark:bg-stone-950 dark:shadow-gray-50",
+          "flex h-full min-h-dvh w-full flex-col bg-stone-50 p-3 shadow-gray-950 sm:mx-auto sm:max-h-[812px] sm:min-h-0 sm:w-[375px] sm:grow sm:rounded-lg sm:shadow-lg dark:bg-stone-950 dark:shadow-gray-50",
           className,
         ].join(" ")}
       >

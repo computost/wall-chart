@@ -14,7 +14,7 @@ import path from "path";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config([
-  { ignores: [".react-router", "build"] },
+  { ignores: [".react-router", "build", "playwright-report"] },
   {
     extends: [js.configs.recommended],
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
