@@ -42,11 +42,11 @@ const workers: Worker[] = Array.from({ length: 100 })
   )
   .sort((a, b) => a.name.localeCompare(b.name));
 
+export type Assessment = 1 | 2 | 3 | 4 | 5;
+
 export type Worker = {
   assessment?: Assessment;
   id: number;
   managerId?: number;
   name: string;
 };
-
-type Assessment = 1 | 2 | 3 | 4 | 5;
