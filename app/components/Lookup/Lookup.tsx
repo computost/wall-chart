@@ -5,9 +5,12 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/react";
-import { MagnifyingGlassIcon as LargeMagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowRightIcon,
+  MagnifyingGlassIcon as LargeMagnifyingGlassIcon,
+} from "@heroicons/react/24/solid";
 import { type ReactNode, useState } from "react";
-import { useFetcher } from "react-router";
+import { Link, useFetcher } from "react-router";
 
 import type { Worker } from "~/api/workers.server";
 import type { loader } from "~/routes/find-workers";
@@ -66,6 +69,11 @@ export function Lookup({ defaultValue, name }: SearchProps): ReactNode {
           }}
           value={query}
         />
+        {value && (
+          <Link reloadDocument to={`/workers/${value.id}`}>
+            <ArrowRightIcon className="size-6" />
+          </Link>
+        )}
       </div>
 
       <ComboboxOptions
